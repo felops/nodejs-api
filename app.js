@@ -1,27 +1,31 @@
 const express = require('express')
 const app = express()
+const models = require('./models');
 
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize('ARANDU', 'root', '', {dialect: 'mysql'})
 
-const Disciplina = sequelize.define('Disciplina', {
-  Nome: {
-    type: Sequelize.STRING
-  }
-})
+models.sequelize.sync().then(()  => {
+   for(let model in models.entity) {
+      let route = '/' +
+                  model.substr(0,1).toLowerCase() +
+                  model.substr(1,model.length);
 
-app.listen(3000)
+      app.get(route, (req, res) => {
+        models.entity[model].all().then((data) => {
+          res.json(data)
+        })
+      })
 
-app.get('/', function (req, res) {
-  res.json({ user: 'Felipe' })
-})
+      app.post(route, (req, res) => {
+        models.entity[model].create({
+          ...req.data
+        })
+        .then(() => {
+          res.json({ msg: 'Cadastrado com sucesso!' })
+        });
+      })
+   }
 
-app.get('/criar', function (req, res) {
-  sequelize.sync()
-    .then(() => Disciplina.create({
-      Nome: 'Matemática'
-    }))
-    .then(jane => {
-      res.json({ user: 'Felipe' })
-    });
-})
+  app.listen(3000);
+});
