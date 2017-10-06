@@ -8,7 +8,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     data: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      defaultValue: sequelize.literal('NOW()')
+    },
+    disciplina: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'Disciplina',
+        key: 'Codigo'
+      }
     },
     professor: {
       type: DataTypes.INTEGER(11),
