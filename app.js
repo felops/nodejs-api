@@ -14,26 +14,33 @@ app.use(function(req, res, next) {
 });
 
 models.sequelize.sync().then(()  => {
-   for(let model in models.entity) {
-      let route = '/' +
-                  model.substr(0,1).toLowerCase() +
-                  model.substr(1,model.length);
+  //create routes
+  for(let model in models.entity) {
+    let route = '/api/' +
+                model.substr(0,1).toLowerCase() +
+                model.substr(1,model.length);
 
-      app.get(route, (req, res) => {
-        models.entity[model].all().then((data) => {
-          res.json(data)
-        })
+    app.get(route, (req, res) => {
+      models.entity[model].all().then((data) => {
+        res.json(data)
       })
+    })
 
-      app.post(route, (req, res) => {
-        models.entity[model].create({
-          ...req.data
-        })
-        .then(() => {
-          res.json({ msg: 'Cadastrado com sucesso!' })
+    app.post(route, (req, res) => {
+      models.entity[model].create(req.body)
+        .then((data) => {
+          res.json({
+            data: data,
+            msg: 'Cadastrado com sucesso!'
+          })
+        }).catch(function (err) {
+          res.json({
+            data: false,
+            msg: err
+          })
         });
-      })
-   }
+    })
+  }
 
   app.listen(3000);
 });
