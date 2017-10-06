@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/felops/nodejs-server#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.1",
     "mysql2": "^1.4.2",
     "sequelize": "^4.13.3"

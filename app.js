@@ -1,9 +1,17 @@
 const express = require('express')
 const app = express()
-const models = require('./models');
+const bodyParser = require('body-parser')
+const models = require('./models')
 
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize('ARANDU', 'root', '', {dialect: 'mysql'})
+
+app.use(express.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 models.sequelize.sync().then(()  => {
    for(let model in models.entity) {
