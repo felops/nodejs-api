@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    Avaiacao: {
+    Avaliacao: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
