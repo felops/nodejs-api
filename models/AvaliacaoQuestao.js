@@ -1,12 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('AvaliacaoQuestao', {
-    Codigo: {
+    codigo: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    Avaliacao: {
+    avaliacao: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'Codigo'
       }
     },
-    Questao: {
+    questao: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'Codigo'
       }
     },
-    AlternativaCerta: {
+    alternativaCerta: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {

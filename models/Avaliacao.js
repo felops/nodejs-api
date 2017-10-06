@@ -1,16 +1,16 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Avaliacao', {
-    Codigo: {
+    codigo: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    Data: {
+    data: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    Professor: {
+    professor: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'Codigo'
       }
     },
-    Classe: {
+    classe: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {

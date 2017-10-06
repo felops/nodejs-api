@@ -1,16 +1,16 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('QuestaoAlternativa', {
-    Codigo: {
+    codigo: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    Descricao: {
+    descricao: {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    Questao: {
+    questao: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {

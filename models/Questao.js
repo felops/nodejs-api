@@ -1,20 +1,20 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Questao', {
-    Codigo: {
+    codigo: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    Descricao: {
+    descricao: {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    Ano: {
+    ano: {
       type: DataTypes.INTEGER(11),
       allowNull: false
     },
-    Fonte: {
+    fonte: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'Codigo'
       }
     },
-    Nivel: {
+    nivel: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
