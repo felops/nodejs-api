@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Area', {
+  return sequelize.define('DisciplinaArea', {
     Codigo: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -19,6 +19,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   }, {
-    tableName: 'Area'
+    tableName: 'DisciplinaArea'
   });
 };
