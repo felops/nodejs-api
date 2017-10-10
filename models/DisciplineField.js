@@ -1,24 +1,24 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('DisciplinaArea', {
-    codigo: {
+  return sequelize.define('DisciplineField', {
+    id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    nome: {
+    name: {
       type: DataTypes.STRING(128),
       allowNull: false
     },
-    disciplina: {
+    discipline: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
-        model: 'Disciplina',
-        key: 'Codigo'
+        model: 'Discipline',
+        key: 'id'
       }
     }
   }, {
-    tableName: 'DisciplinaArea'
+    tableName: 'DisciplineField'
   });
 };

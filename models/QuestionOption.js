@@ -1,24 +1,24 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('QuestaoAlternativa', {
-    codigo: {
+  return sequelize.define('QuestionOption', {
+    id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    descricao: {
+    option: {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    questao: {
+    question: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'Questao',
-        key: 'Codigo'
+        model: 'Question',
+        key: 'id'
       }
     }
   }, {
-    tableName: 'QuestaoAlternativa'
+    tableName: 'QuestionOption'
   });
 };

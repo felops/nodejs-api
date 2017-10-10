@@ -1,22 +1,22 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Avaliacao', {
-    codigo: {
+  return sequelize.define('Exam', {
+    id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    data: {
+    date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: sequelize.literal('NOW()')
     },
-    disciplina: {
+    discipline: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
-        model: 'Disciplina',
-        key: 'Codigo'
+        model: 'Discipline',
+        key: 'id'
       }
     },
     professor: {
@@ -24,18 +24,18 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       references: {
         model: 'Professor',
-        key: 'Codigo'
+        key: 'id'
       }
     },
-    classe: {
+    class: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
-        model: 'Classe',
-        key: 'Codigo'
+        model: 'Class',
+        key: 'id'
       }
     }
   }, {
-    tableName: 'Avaliacao'
+    tableName: 'Exam'
   });
 };

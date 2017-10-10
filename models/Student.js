@@ -1,12 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Aluno', {
-    codigo: {
+  return sequelize.define('Student', {
+    id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    nome: {
+    name: {
       type: DataTypes.STRING(128),
       allowNull: false
     },
@@ -14,11 +14,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(128),
       allowNull: true
     },
-    senha: {
+    password: {
       type: "BINARY(64)",
       allowNull: true
     },
-    classe: {
+    class: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       references: {
@@ -27,6 +27,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   }, {
-    tableName: 'Aluno'
+    tableName: 'Student'
   });
 };

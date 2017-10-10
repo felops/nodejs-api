@@ -1,36 +1,36 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('AvaliacaoQuestao', {
-    codigo: {
+  return sequelize.define('ExamQuestion', {
+    id: {
       type: DataTypes.BIGINT,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    avaliacao: {
+    exam: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'Avaliacao',
-        key: 'Codigo'
+        model: 'Exam',
+        key: 'id'
       }
     },
-    questao: {
+    question: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'Questao',
-        key: 'Codigo'
+        model: 'Question',
+        key: 'id'
       }
     },
-    alternativaCerta: {
+    optionResponse: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'QuestaoAlternativa',
-        key: 'Codigo'
+        model: 'QuestionOption',
+        key: 'id'
       }
     }
   }, {
-    tableName: 'AvaliacaoQuestao'
+    tableName: 'ExamQuestion'
   });
 };
