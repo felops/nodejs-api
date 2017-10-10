@@ -14,6 +14,22 @@ app.use(function(req, res, next) {
 });
 
 models.sequelize.sync().then(()  => {
+    // custom routes
+    app.get('/api/loadExam', (req, res) => {
+      models.entity['Exam'].all().then((d1) => {
+        models.entity['ExamQuestion'].all().then((d2) => {
+          let prova = [];
+          models.entity['Question'].all().then((d3) => {
+            prova.push(d3[0].dataValues);
+            models.entity['QuestionOption'].all().then((d4) => {
+              d3[0].dataValues.options = d4;
+              res.json(d3[0]);
+            })
+          })
+        })
+      })
+    })
+
   //create routes
   for(let model in models.entity) {
     let route = '/api/' +
