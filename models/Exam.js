@@ -11,6 +11,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: sequelize.literal('NOW()')
     },
+    class: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'Class',
+        key: 'id'
+      }
+    },
     discipline: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -24,14 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       references: {
         model: 'Professor',
-        key: 'id'
-      }
-    },
-    class: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'Class',
         key: 'id'
       }
     }

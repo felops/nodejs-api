@@ -14,20 +14,20 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: false
     },
-    source: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'QuestaoFonte',
-        key: 'Codigo'
-      }
-    },
     level: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
         model: 'QuestionLevel',
-        key: 'Codigo'
+        key: 'id'
+      }
+    },
+    source: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'QuestionSource',
+        key: 'id'
       }
     }
   }, {

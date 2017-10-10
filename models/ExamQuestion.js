@@ -21,14 +21,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Question',
         key: 'id'
       }
-    },
-    optionResponse: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: 'QuestionOption',
-        key: 'id'
-      }
     }
   }, {
     tableName: 'ExamQuestion'
