@@ -16,6 +16,16 @@ models.sequelize.sync().then(()  => {
   // mockData(models)
 
   // custom routes
+  app.get('/api/exams', (req, res) => {
+    models.entity['Exam'].all({
+      order: [
+        ['createdAt', 'DESC']
+      ]
+    }).then((data) => {
+      res.json(data);
+    })
+  })
+
   app.get('/api/loadExam/:id', (req, res) => {
     models.entity['ExamQuestion'].findAll({
       include: [{
