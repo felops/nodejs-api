@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
 
 models.sequelize.sync().then(()  => {
   // mock data for testing
-  mockData(models)
+  // mockData(models)
 
   // custom routes
   app.get('/api/loadExam/:id', (req, res) => {

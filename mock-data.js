@@ -42,24 +42,28 @@ function mockData(models) {
   models.entity['Exam'].create({
     class: 1,
     discipline: 1,
+    title: 'Avaliação 1',
     professor: 1
   });
 
   models.entity['Exam'].create({
     class: 2,
     discipline: 1,
+    title: 'Avaliação 2',
     professor: 1
   });
 
   models.entity['Exam'].create({
     class: 3,
     discipline: 1,
+    title: 'Avaliação 3',
     professor: 1
   });
 
   models.entity['Exam'].create({
     class: 4,
     discipline: 1,
+    title: 'Avaliação 4',
     professor: 1
   });
 
