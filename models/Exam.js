@@ -27,6 +27,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    title: {
+      type: DataTypes.STRING(128),
+      allowNull: false
+    },
     professor: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
