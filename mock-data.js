@@ -14,6 +14,13 @@ function mockData(models) {
   models.entity['Class'].create({name:'2A'})
   models.entity['Class'].create({name:'2B'})
 
+  models.entity['Student'].create({
+    name: 'Felipe',
+    email: 'felipe@gmail.com',
+    password: 'senha123',
+    class: 1
+  })
+
   models.entity['QuestionSource'].create({source:'ENEM'})
   models.entity['QuestionSource'].create({source:'FUVEST'})
 

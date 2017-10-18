@@ -15,7 +15,7 @@ models.sequelize.sync().then(()  => {
   // mock data for testing
   // mockData(models)
 
-  // custom routes
+  // GETs
   app.get('/api/exams', (req, res) => {
     models.entity['Exam'].all({
       order: [
@@ -42,6 +42,75 @@ models.sequelize.sync().then(()  => {
     })
   })
 
+
+  // POSTs
+  app.post('/api/examStudent', (req, res) => {
+    models.entity['ExamStudent'].bulkCreate(req.body).then(() => {
+      res.json({
+        data: true,
+        msg: 'Cadastrado com sucesso!'
+      })
+    }).catch(function(err) {
+      res.json({
+        data: false,
+        msg: err
+      })
+    })
+  });
+
+  app.post('/api/exam', (req, res) => {
+    models.entity['Question'].findAll({
+      where: {
+        year: req.body.year,
+        level: req.body.level,
+        source: req.body.source
+      },
+      order: [
+        models.Sequelize.fn('RAND'),
+      ]
+    }).then((data) => {
+      if(data.length >= req.body.questions) {
+        models.entity['Exam'].create({
+          class: req.body.class,
+          discipline: req.body.discipline,
+          title: req.body.title,
+          professor: req.body.professor
+        }).then((exam) => {
+          let questions = [];
+
+          for(let i=0; i<req.body.questions; i++) {
+            questions.push({
+              exam: exam.id,
+              question: data[i].id
+            });
+          }
+
+          models.entity['ExamQuestion'].bulkCreate(questions).then(() => {
+            res.json({
+              data: data,
+              msg: 'Cadastrado com sucesso!'
+            })
+          }).catch(function(err) {
+            res.json({
+              data: false,
+              msg: 'Erro ao cadastrar avaliação.'
+            })
+          })
+        });
+      } else {
+        res.json({
+          data: false,
+          msg: 'Número de questões insuficiente para os parâmetros selecionados.'
+        })
+      }
+    }).catch(function(err) {
+      res.json({
+        data: false,
+        msg: 'Erro ao cadastrar avaliação.'
+      })
+    });
+  });
+/*
   //create routes
   for(let model in models.entity) {
     let route = '/api/' +
@@ -61,7 +130,7 @@ models.sequelize.sync().then(()  => {
             data: data,
             msg: 'Cadastrado com sucesso!'
           })
-        }).catch(function (err) {
+        }).catch(function(err) {
           res.json({
             data: false,
             msg: err
@@ -69,6 +138,6 @@ models.sequelize.sync().then(()  => {
         });
     })
   }
-
+*/
   app.listen(3000);
 });
