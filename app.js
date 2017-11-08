@@ -77,7 +77,7 @@ models.sequelize.sync().then(()  => {
   });
 
   app.post('/api/examStudent', (req, res) => {
-    models.entity['ExamStudent'].bulkCreate(req.body).then(() => {
+    models.entity['ExamStudent'].create(req.body).then(() => {
       res.json({
         data: true,
         msg: 'Cadastrado com sucesso!'
