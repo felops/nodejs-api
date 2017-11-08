@@ -25,6 +25,16 @@ module.exports = function(sequelize, DataTypes) {
         model: 'QuestionOption',
         key: 'id'
       }
+    },
+    dateStart: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('NOW()')
+    },
+    dateEnd: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('NOW()')
     }
   }, {
     tableName: 'ExamStudent'

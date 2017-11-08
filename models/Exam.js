@@ -6,7 +6,12 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    date: {
+    dateStart: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: sequelize.literal('NOW()')
+    },
+    dateEnd: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: sequelize.literal('NOW()')
