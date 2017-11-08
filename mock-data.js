@@ -15,19 +15,14 @@ function mockData(models) {
   models.entity['Class'].create({name:'2B'})
 
   models.entity['Student'].create({
-    name: 'Felipe',
-    email: 'felipe@gmail.com',
-    password: 'senha123',
+    id: 1350153,
+    name: 'Felipe Lopes',
     class: 1
   })
 
   models.entity['QuestionSource'].create({source:'ENEM'})
   models.entity['QuestionSource'].create({source:'FUVEST'})
-
-  models.entity['QuestionLevel'].create({name:'A'})
-  models.entity['QuestionLevel'].create({name:'B'})
-  models.entity['QuestionLevel'].create({name:'C'})
-
+  
   for(let i=1; i <= 40; i++) {
     models.entity['Question'].create({
       question: 'Responda ' + i,
