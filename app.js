@@ -45,6 +45,36 @@ models.sequelize.sync().then(()  => {
     })
   })
 
+  app.get('/api/onGoingExams', (req, res) => {
+    let now = models.sequelize.literal('NOW()');
+
+    models.entity['Exam'].findAll({
+      include: [{
+        model: models.entity['ExamQuestion'],
+        include: [{
+          model: models.entity['ExamStudent'],
+          where: {
+            student: 1
+          }
+        }]
+      }],
+      where: {
+        'dateStart': {
+           [models.Sequelize.Op.lt]: now
+        },
+        'dateEnd': {
+          [models.Sequelize.Op.gt]: now
+        },
+      }
+    }).then((data) => {
+      if(data[0].ExamQuestions[0].ExamStudents.length > 0)
+        res.json({exam: false})
+      else {
+        res.json({exam: data[0].ExamQuestions[0].exam})
+      }
+    })
+  })
+
 
   // POSTs
   app.post('/api/login', (req, res) => {
