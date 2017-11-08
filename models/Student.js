@@ -3,20 +3,11 @@ module.exports = function(sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING(128),
       allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING(128),
-      allowNull: true
-    },
-    password: {
-      type: DataTypes.STRING.BINARY,
-      allowNull: true
     },
     class: {
       type: DataTypes.INTEGER(11),
