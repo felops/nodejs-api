@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const path = require("path")
 const bodyParser = require('body-parser')
 const models = require('./models')
 const mockData = require('./mock-data')
@@ -8,9 +9,9 @@ app.use(express.json())
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+  res.header('Expires', '-1')
+  res.header('Pragma', 'no-cache')
   next()
 })
 
@@ -25,7 +26,7 @@ models.sequelize.sync().then(()  => {
         ['createdAt', 'DESC']
       ]
     }).then((data) => {
-      res.json(data);
+      res.json(data)
     })
   })
 
@@ -41,12 +42,12 @@ models.sequelize.sync().then(()  => {
         exam: req.params.id,
       }
     }).then((data) => {
-      res.json(data);
+      res.json(data)
     })
   })
 
   app.get('/api/onGoingExams', (req, res) => {
-    let now = models.sequelize.literal('NOW()');
+    let now = models.sequelize.literal('NOW()')
 
     models.entity['Exam'].findAll({
       include: [{
@@ -89,13 +90,13 @@ models.sequelize.sync().then(()  => {
         res.json({
           data: true,
           msg: ''
-        });
+        })
       } else {
         models.entity['Student'].create({ id: post.id, name: post.name, class: post.class }).then(task => {
           res.json({
             data: true,
             msg: ''
-          });
+          })
         }).catch(function(err) {
           res.json({
             data: false,
@@ -124,12 +125,12 @@ models.sequelize.sync().then(()  => {
         res.json({
           data: true,
           msg: ''
-        });
+        })
       } else {
         res.json({
           data: false,
           msg: 'Senha e/ou usuário inválidos.'
-        });
+        })
       }
     }).catch(function(err) {
       res.json({
@@ -137,7 +138,7 @@ models.sequelize.sync().then(()  => {
         msg: err
       })
     })
-  });
+  })
 
   app.post('/api/examStudent', (req, res) => {
     models.entity['ExamStudent'].create(req.body).then(() => {
@@ -151,7 +152,7 @@ models.sequelize.sync().then(()  => {
         msg: err
       })
     })
-  });
+  })
 
   app.post('/api/exam', (req, res) => {
     models.entity['Question'].findAll({
@@ -171,13 +172,13 @@ models.sequelize.sync().then(()  => {
           title: req.body.title,
           professor: req.body.professor
         }).then((exam) => {
-          let questions = [];
+          let questions = []
 
           for(let i=0; i<req.body.questions; i++) {
             questions.push({
               exam: exam.id,
               question: data[i].id
-            });
+            })
           }
 
           models.entity['ExamQuestion'].bulkCreate(questions).then(() => {
@@ -191,7 +192,7 @@ models.sequelize.sync().then(()  => {
               msg: 'Erro ao cadastrar avaliação.'
             })
           })
-        });
+        })
       } else {
         res.json({
           data: false,
@@ -210,7 +211,7 @@ models.sequelize.sync().then(()  => {
   for(let model in models.entity) {
     let route = '/api/' +
                 model.substr(0,1).toLowerCase() +
-                model.substr(1,model.length);
+                model.substr(1,model.length)
 
     app.get(route, (req, res) => {
       models.entity[model].all().then((data) => {
@@ -230,9 +231,9 @@ models.sequelize.sync().then(()  => {
             data: false,
             msg: err
           })
-        });
+        })
     })
   }
 */
-  app.listen(3000);
-});
+  app.listen(3000)
+})
