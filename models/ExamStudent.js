@@ -20,7 +20,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     questionOption: {
       type: DataTypes.BIGINT,
-      allowNull: false,
       references: {
         model: 'QuestionOption',
         key: 'id'
