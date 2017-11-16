@@ -26,9 +26,14 @@ Object.keys(db).forEach(function(modelName) {
 })
 
 db.entity['ExamQuestion'].belongsTo(db.entity['Question'], {foreignKey: 'question'})
-db.entity['Question'].hasMany(db.entity['QuestionOption'], {foreignKey : 'question'})
+db.entity['Question'].hasMany(db.entity['QuestionOption'], {foreignKey: 'question'})
 db.entity['Exam'].hasMany(db.entity['ExamQuestion'], {foreignKey: 'exam'})
 db.entity['ExamQuestion'].hasMany(db.entity['ExamStudent'], {foreignKey: 'examQuestion'})
 
+db.entity['Exam'].belongsTo(db.entity['Discipline'], {foreignKey: 'discipline'})
+db.entity['Discipline'].hasMany(db.entity['Exam'], {foreignKey: 'discipline'})
+
+db.entity['Exam'].belongsTo(db.entity['Class'], {foreignKey: 'class'})
+db.entity['Class'].hasMany(db.entity['Exam'], {foreignKey: 'class'})
 
 module.exports = db
