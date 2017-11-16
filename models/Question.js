@@ -10,17 +10,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(1024),
       allowNull: false
     },
-    year: {
+    disciplineField: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      references: {
+        model: 'DisciplineField',
+        key: 'id'
+      }
+    },
+    year: {
+      type: DataTypes.INTEGER(11)
     },
     level: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
+      type: DataTypes.INTEGER(11)
     },
     source: {
       type: DataTypes.INTEGER(11),
-      allowNull: true,
       references: {
         model: 'QuestionSource',
         key: 'id'

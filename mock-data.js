@@ -9,6 +9,10 @@ function mockData(models) {
   models.entity['Discipline'].create({name:'Português'})
   models.entity['Discipline'].create({name:'História'})
 
+  models.entity['DisciplineField'].create({name:'Geometria', discipline: 1})
+  models.entity['DisciplineField'].create({name:'Trigonometria', discipline: 1})
+  models.entity['DisciplineField'].create({name:'Álgebra', discipline: 1})
+
   models.entity['Class'].create({name:'1A'})
   models.entity['Class'].create({name:'1B'})
   models.entity['Class'].create({name:'2A'})
@@ -22,10 +26,11 @@ function mockData(models) {
 
   models.entity['QuestionSource'].create({source:'ENEM'})
   models.entity['QuestionSource'].create({source:'FUVEST'})
-  
+
   for(let i=1; i <= 40; i++) {
     models.entity['Question'].create({
       question: 'Responda ' + i,
+      disciplineField: 1,
       year: 2016,
       level: 2,
       source: 1
