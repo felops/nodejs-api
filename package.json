@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,6 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.1",
     "mysql2": "^1.4.2",
-    "sequelize": "^4.13.3"
-  },
-  "scripts": {
-    "start": "node app.js"
+    "sequelize": "^4.22.7"
   }
 }
