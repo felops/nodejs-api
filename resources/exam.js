@@ -9,7 +9,7 @@ module.exports = (app, models) => {
     })
   })
 
-  app.get('/api/exam/:id', (req, res) => {
+  app.get('/api/exam/:id/question', (req, res) => {
     models.entity['ExamQuestion'].findAll({
       include: [{
         model: models.entity['Question'],
