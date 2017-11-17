@@ -1,4 +1,10 @@
 module.exports = (app, models) => {
+  app.get('/api/class', (req, res) => {
+    models.entity['Class'].findAll().then((data) => {
+      res.json(data)
+    })
+  })
+
   app.get('/api/class/:id/exam', (req, res) => {
     models.entity['Exam'].findAll({
       where: {
@@ -27,6 +33,15 @@ module.exports = (app, models) => {
       }
     }).then((data) => {
       res.json(data)
+    })
+  })
+
+  app.post('/api/class', (req, res) => {
+    models.entity['Class'].create(req.body).then((data) => {
+      res.json({
+        data: data.dataValues,
+        msg: 'Cadastrado com sucesso!'
+      })
     })
   })
 }

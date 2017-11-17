@@ -29,4 +29,13 @@ module.exports = (app, models) => {
       res.json(data)
     })
   })
+
+  app.post('/api/professor', (req, res) => {
+    models.entity['Professor'].create(req.body).then((data) => {
+      res.json({
+        data: data.dataValues,
+        msg: 'Cadastrado com sucesso!'
+      })
+    })
+  })
 }
