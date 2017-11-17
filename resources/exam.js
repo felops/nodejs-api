@@ -42,7 +42,7 @@ module.exports = (app, models) => {
     })
   })
 
-  function getFilters(params, list) {
+  function getWhereConditions(params, list) {
     let obj = {}
 
     for(param in params) {
@@ -54,7 +54,7 @@ module.exports = (app, models) => {
   }
 
   app.post('/api/exam/:id/question', (req, res) => {
-    let where = getFilters(req.body, ['year', 'level', 'source', 'disciplineField'])
+    let where = getWhereConditions(req.body, ['year', 'level', 'source', 'disciplineField'])
 
     models.entity['Question'].findAll({
       where: where,
