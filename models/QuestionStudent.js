@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('ExamStudent', {
+  return sequelize.define('QuestionStudent', {
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -36,6 +36,6 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: sequelize.literal('NOW()')
     }
   }, {
-    tableName: 'ExamStudent'
+    tableName: 'QuestionStudent'
   })
 }

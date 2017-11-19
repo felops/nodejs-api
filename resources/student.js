@@ -1,14 +1,14 @@
 module.exports = (app, models) => {
   app.post('/api/student/:student/exam/:exam/question/:question', (req, res) => {
     if(req.params.question != req.body.nextQuestion) {
-      models.entity['ExamStudent'].create({
+      models.entity['QuestionStudent'].create({
         student: req.params.student,
         examQuestion: req.body.nextQuestion
       })
     }
 
     if(req.params.question) {
-      models.entity['ExamStudent'].update({
+      models.entity['QuestionStudent'].update({
         dateEnd: models.sequelize.literal('NOW()'),
         questionOption: req.body.questionOption
       }, {
