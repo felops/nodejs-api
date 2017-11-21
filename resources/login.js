@@ -8,28 +8,31 @@ module.exports = (app, models) => {
       }
     }).then((data) => {
       if(data.length == 1) {
-        res.json({
-          data: true,
-          msg: ''
-        })
-      } else {
-        models.entity['Student'].create({ id: post.id, name: post.name, class: post.class }).then(task => {
+        models.entity['Student'].update({
+          name: post.name,
+          class: post.class
+        }, {
+          where: {
+            id: post.id
+          }
+        }).then(() => {
           res.json({
-            data: true,
+            data: data,
             msg: ''
           })
-        }).catch(function(err) {
+        })
+      } else {
+        models.entity['Student'].create({
+          id: post.id,
+          name: post.name,
+          class: post.class
+        }).then(student => {
           res.json({
-            data: false,
-            msg: err
+            data: student,
+            msg: ''
           })
         })
       }
-    }).catch(function(err) {
-      res.json({
-        data: false,
-        msg: err
-      })
     })
   })
 
@@ -44,7 +47,7 @@ module.exports = (app, models) => {
     }).then((data) => {
       if(data.length == 1) {
         res.json({
-          data: true,
+          data: data,
           msg: ''
         })
       } else {
@@ -53,11 +56,6 @@ module.exports = (app, models) => {
           msg: 'Senha e/ou usuário inválidos.'
         })
       }
-    }).catch(function(err) {
-      res.json({
-        data: false,
-        msg: err
-      })
     })
   })
 }
