@@ -36,4 +36,7 @@ db.entity['Exam'].belongsTo(db.entity['Class'], {foreignKey: 'class'})
 db.entity['Class'].hasMany(db.entity['Exam'], {foreignKey: 'class'})
 
 db.entity['ExamQuestion'].hasMany(db.entity['StudentAnswer'], {foreignKey: 'examQuestion'})
+
+db.entity['Question'].hasOne(db.entity['QuestionAnswer'], {foreignKey: 'question'})
+
 module.exports = db
