@@ -7,8 +7,12 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     student: {
-      type: DataTypes.BIGINT,
-      allowNull: false
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'Student',
+        key: 'id'
+      }
     },
     examQuestion: {
       type: DataTypes.BIGINT,
