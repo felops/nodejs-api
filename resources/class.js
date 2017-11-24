@@ -28,7 +28,7 @@ module.exports = (app, models) => {
            [models.Sequelize.Op.lt]: now
         },
         dateEnd: {
-          [models.Sequelize.Op.lt]: now
+          [models.Sequelize.Op.gt]: now
         },
       }
     }).then((data) => {
