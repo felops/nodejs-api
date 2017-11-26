@@ -28,6 +28,32 @@ module.exports = (app, models) => {
     })
   })
 
+  app.get('/api/exam/:exam/student/:student', (req, res) => {
+    models.entity['Exam'].findAll({
+      include: [{
+        model: models.entity['ExamQuestion'],
+        include: [
+          {
+            model: models.entity['StudentAnswer'],
+            where: {
+              student: req.params.student,
+            }
+          },
+          {
+          model: models.entity['Question'],
+          include: [{
+            model: models.entity['QuestionOption']
+          }]
+        }]
+      }],
+      where: {
+        id: req.params.exam,
+      }
+    }).then((data) => {
+      res.json(data)
+    })
+  })
+
   app.post('/api/exam', (req, res) => {
     models.entity['Exam'].create(req.body).then((data) => {
       res.json({
