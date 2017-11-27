@@ -37,14 +37,16 @@ module.exports = (app, models) => {
             model: models.entity['StudentAnswer'],
             where: {
               student: req.params.student,
-            }
+            },
+            required: false
           },
           {
-          model: models.entity['Question'],
-          include: [{
-            model: models.entity['QuestionOption']
-          }]
-        }]
+            model: models.entity['Question'],
+            include: [{
+              model: models.entity['QuestionOption']
+            }]
+          }
+        ]
       }],
       where: {
         id: req.params.exam,

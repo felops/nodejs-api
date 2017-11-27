@@ -61,7 +61,7 @@ module.exports = (app, models) => {
           id: req.params.question,
         },
         include: [
-          { model: models.entity['StudentAnswer'] },
+          { model: models.entity['StudentAnswer'], required: false },
           {
             model: models.entity['Question'],
             include: [{
