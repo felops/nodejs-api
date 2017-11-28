@@ -1,6 +1,10 @@
 module.exports = (app, models) => {
   app.get('/api/disciplineField', (req, res) => {
-    models.entity['DisciplineField'].findAll().then((data) => {
+    models.entity['DisciplineField'].findAll({
+      include: [
+        { model: models.entity['Discipline'] }
+      ]
+    }).then((data) => {
       res.json(data)
     })
   })
@@ -10,6 +14,22 @@ module.exports = (app, models) => {
       res.json({
         data: data.dataValues,
         msg: 'Cadastrado com sucesso!'
+      })
+    })
+  })
+
+  app.delete('/api/disciplineField/:id', (req, res) => {
+    models.entity['DisciplineField'].destroy({
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: data,
+        msg: 'Excluído com sucesso!'
+      })
+    }).catch((err) => {
+      res.json({
+        data: false,
+        msg: err
       })
     })
   })

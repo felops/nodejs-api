@@ -1,8 +1,10 @@
 module.exports = (app, models) => {
   app.get('/api/exam', (req, res) => {
-    models.entity['Exam'].all({
-      order: [
-        ['createdAt', 'DESC']
+    models.entity['Exam'].findAll({
+      include: [
+        { model: models.entity['Class'] },
+        { model: models.entity['Discipline'] },
+        { model: models.entity['Professor'] }
       ]
     }).then((data) => {
       res.json(data)
@@ -121,6 +123,23 @@ module.exports = (app, models) => {
       res.json({
         data: false,
         msg: 'Erro ao cadastrar questões. Por favor, tente novamente.'
+      })
+    })
+  })
+
+
+  app.delete('/api/exam/:id', (req, res) => {
+    models.entity['Exam'].destroy({
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: data,
+        msg: 'Excluído com sucesso!'
+      })
+    }).catch((err) => {
+      res.json({
+        data: false,
+        msg: err
       })
     })
   })

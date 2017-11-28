@@ -1,4 +1,10 @@
 module.exports = (app, models) => {
+  app.get('/api/professor', (req, res) => {
+    models.entity['Professor'].findAll().then((data) => {
+      res.json(data)
+    })
+  })
+
   app.get('/api/professor/:id/exam/', (req, res) => {
     models.entity['Exam'].findAll({
       include: [
@@ -84,6 +90,22 @@ module.exports = (app, models) => {
       res.json({
         data: data.dataValues,
         msg: 'Cadastrado com sucesso!'
+      })
+    })
+  })
+
+  app.delete('/api/professor/:id', (req, res) => {
+    models.entity['Professor'].destroy({
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: data,
+        msg: 'Excluído com sucesso!'
+      })
+    }).catch((err) => {
+      res.json({
+        data: false,
+        msg: err
       })
     })
   })

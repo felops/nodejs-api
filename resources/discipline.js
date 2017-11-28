@@ -23,4 +23,20 @@ module.exports = (app, models) => {
       })
     })
   })
+
+  app.delete('/api/discipline/:id', (req, res) => {
+    models.entity['Discipline'].destroy({
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: data,
+        msg: 'Excluído com sucesso!'
+      })
+    }).catch((err) => {
+      res.json({
+        data: false,
+        msg: err
+      })
+    })
+  })
 }

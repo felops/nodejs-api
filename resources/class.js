@@ -44,4 +44,20 @@ module.exports = (app, models) => {
       })
     })
   })
+
+  app.delete('/api/class/:id', (req, res) => {
+    models.entity['Class'].destroy({
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: data,
+        msg: 'Excluído com sucesso!'
+      })
+    }).catch((err) => {
+      res.json({
+        data: false,
+        msg: err
+      })
+    })
+  })
 }

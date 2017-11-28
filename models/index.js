@@ -35,6 +35,15 @@ db.entity['Discipline'].hasMany(db.entity['Exam'], {foreignKey: 'discipline'})
 db.entity['Exam'].belongsTo(db.entity['Class'], {foreignKey: 'class'})
 db.entity['Class'].hasMany(db.entity['Exam'], {foreignKey: 'class'})
 
+db.entity['Exam'].belongsTo(db.entity['Professor'], {foreignKey: 'professor'})
+db.entity['Professor'].hasMany(db.entity['Exam'], {foreignKey: 'professor'})
+
+db.entity['DisciplineField'].belongsTo(db.entity['Discipline'], {foreignKey: 'discipline'})
+db.entity['Discipline'].hasMany(db.entity['DisciplineField'], {foreignKey: 'discipline'})
+
+db.entity['Question'].belongsTo(db.entity['DisciplineField'], {foreignKey: 'disciplineField'})
+db.entity['DisciplineField'].hasMany(db.entity['Question'], {foreignKey: 'disciplineField'})
+
 db.entity['ExamQuestion'].hasMany(db.entity['StudentAnswer'], {foreignKey: 'examQuestion'})
 
 db.entity['Question'].hasOne(db.entity['QuestionAnswer'], {foreignKey: 'question'})
