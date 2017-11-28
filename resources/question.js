@@ -2,7 +2,9 @@ module.exports = (app, models) => {
   app.get('/api/question', (req, res) => {
     models.entity['Question'].findAll({
       include: [
-        { model: models.entity['DisciplineField'] }
+        { model: models.entity['DisciplineField'],
+          include: [{ model: models.entity['Discipline'] }]
+        }
       ]
     }).then((data) => {
       res.json(data)
@@ -27,6 +29,17 @@ module.exports = (app, models) => {
             msg: 'Cadastrado com sucesso!'
           })
         })
+      })
+    })
+  })
+
+  app.put('/api/question/:id', (req, res) => {
+    models.entity['Question'].update(req.body, {
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: true,
+        msg: 'Alterado com sucesso!'
       })
     })
   })

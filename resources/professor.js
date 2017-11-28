@@ -94,6 +94,17 @@ module.exports = (app, models) => {
     })
   })
 
+  app.put('/api/professor/:id', (req, res) => {
+    models.entity['Professor'].update(req.body, {
+      where: { id: req.params.id }
+    }).then((data) => {
+      res.json({
+        data: true,
+        msg: 'Alterado com sucesso!'
+      })
+    })
+  })
+
   app.delete('/api/professor/:id', (req, res) => {
     models.entity['Professor'].destroy({
       where: { id: req.params.id }
