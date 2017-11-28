@@ -24,11 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11)
     },
     source: {
-      type: DataTypes.INTEGER(11),
-      references: {
-        model: 'QuestionSource',
-        key: 'id'
-      }
+      type: DataTypes.STRING(256)
     }
   }, {
     tableName: 'Question'
