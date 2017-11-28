@@ -11,9 +11,22 @@ module.exports = (app, models) => {
 
   app.post('/api/question/', (req, res) => {
     models.entity['Question'].create(req.body).then((data) => {
-      res.json({
-        data: data.dataValues,
-        msg: 'Cadastrado com sucesso!'
+      let question = data.dataValues.id
+      models.entity['QuestionOption'].bulkCreate([
+        { option: req.body.option1, question: question },
+        { option: req.body.option2, question: question },
+        { option: req.body.option3, question: question },
+        { option: req.body.option4, question: question }
+      ]).then((data) => {
+        models.entity['QuestionAnswer'].create({
+          question: question,
+          option: data[req.body.rightOption - 1].dataValues.id
+        }).then((data) => {
+          res.json({
+            data: data,
+            msg: 'Cadastrado com sucesso!'
+          })
+        })
       })
     })
   })
