@@ -24,9 +24,6 @@ function mockData(models) {
     class: 1
   })
 
-  models.entity['QuestionSource'].create({source:'ENEM'})
-  models.entity['QuestionSource'].create({source:'FUVEST'})
-
   models.entity['Exam'].create({
     class: 1,
     discipline: 1,
@@ -244,25 +241,25 @@ function mockData(models) {
     models.entity['Question'].create({
       question: questions[i].question,
       disciplineField: questions[i].disciplineField,
-    })
-
-    models.entity['ExamQuestion'].create({
-      exam: 1,
-      question: questionId
-    })
-
-    for(let j=0; j < 5; j++) {
-      models.entity['QuestionOption'].create({
-        option: questions[i].options[j].option,
+    }).then(() => {
+      models.entity['ExamQuestion'].create({
+        exam: 1,
         question: questionId
       })
-    }
 
-    let optionId = 1 + i * 5
+      for(let j=0; j < 5; j++) {
+        models.entity['QuestionOption'].create({
+          option: questions[i].options[j].option,
+          question: questionId
+        })
+      }
 
-    models.entity['QuestionAnswer'].create({
-      question: questionId,
-      option: optionId
+      let optionId = 1 + i * 5
+
+      models.entity['QuestionAnswer'].create({
+        question: questionId,
+        option: optionId
+      })
     })
   }
 }
