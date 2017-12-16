@@ -245,20 +245,20 @@ function mockData(models) {
       models.entity['ExamQuestion'].create({
         exam: 1,
         question: questionId
-      })
-
-      for(let j=0; j < 5; j++) {
-        models.entity['QuestionOption'].create({
-          option: questions[i].options[j].option,
-          question: questionId
-        })
-      }
-
-      let optionId = 1 + i * 5
-
-      models.entity['QuestionAnswer'].create({
-        question: questionId,
-        option: optionId
+      }).then(() => {
+        for(let j=0; j < 5; j++) {
+          models.entity['QuestionOption'].create({
+            option: questions[i].options[j].option,
+            question: questionId
+          }).then(() => {
+            let optionId = 1 + i * 5
+    
+            models.entity['QuestionAnswer'].create({
+              question: questionId,
+              option: optionId
+            })
+          })
+        }
       })
     })
   }
